@@ -1,0 +1,7 @@
+<h1>Результаты запроса "{{ query }}"</h1>
+
+<ul>
+{% for document in result %}
+    <li>{{ document.title }} -- {{ document.text }} </li>
+{% endfor %}
+</ul>
