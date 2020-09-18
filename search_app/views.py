@@ -16,3 +16,7 @@ def index(request):
         query = request.POST['query']
         search, _ = Search.objects.get_or_create(query=query)
         return redirect('result', search_id=search.id)
+
+
+def help_page(request):
+    return render(request, 'search_app/help.html')

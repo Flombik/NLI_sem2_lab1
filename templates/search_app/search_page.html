@@ -1,3 +1,5 @@
+{% include 'search_app/navigation.html' %}
+
 <h1>Поиск</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -5,6 +7,6 @@
 <form action="" method="post">
 {% csrf_token %}
     <label for="query">Введите запрос: </label>
-    <input id="query" type="text" name="query" value="{{ query_string }}">
+    <input id="query" type="text" name="query" required value="{{ query_string }}">
     <input type="submit" value="Ввод">
 </form>
