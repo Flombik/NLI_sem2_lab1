@@ -7,6 +7,7 @@ import math
 class Document(models.Model):
     title = models.CharField(max_length=1000, null=True, default='Title')
     text = models.CharField(max_length=10000, null=True, default='Sample text')
+    snippet = models.CharField(max_length=300, null=True, default='Sample text')
 
     def get_words(self):
         words = {}
@@ -106,5 +107,10 @@ class Search(models.Model):
             numerator = 0
             for word in search_tf_idf:
                 numerator += search_tf_idf[word] * doc_tf_idf[word]
-            docs_sim[doc] = numerator / (self.get_length() * doc.get_length())
+            try:
+                result = numerator / (self.get_length() * doc.get_length())
+                if result != 0:
+                    docs_sim[doc] = result
+            except ZeroDivisionError:
+                return list()
         return sorted(docs_sim, key=docs_sim.get, reverse=True)
